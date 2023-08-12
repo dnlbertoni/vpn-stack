@@ -1,0 +1,47 @@
+version: '3'
+services:
+  openvpn:
+    image: kylemanna/openvpn
+    container_name: openvpn
+    ports:
+      - "1194:1194/udp"
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - OVPN_NETWORK=${OVPN_NETWORK}
+      - OVPN_SUBNET=${OVPN_SUBNET}
+      - OVPN_PROTO=${OVPN_PROTO}
+      - OVPN_DNS=${OVPN_DNS}
+    volumes:
+      - ovpn-data:/etc/openvpn
+    restart: always
+
+  pritunl:
+    image: pritunl/pritunl
+    container_name: pritunl
+    ports:
+      - "443:443"
+    depends_on:
+      - openvpn
+    environment:
+      - MONGODB_URI=mongodb://mongodb:27017/pritunl
+      - SERVER_PORT=443
+      - SERVER_PROTOCOL=https
+      - LETSENCRYPT_HOST=${LETSENCRYPT_HOST}
+      - LETSENCRYPT_EMAIL=${LETSENCRYPT_EMAIL}
+      - ALLOW_INSECURE=true
+    volumes:
+      - pritunl-data:/data
+    restart: always
+
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    volumes:
+      - mongodb-data:/data/db
+    restart: always
+
+volumes:
+  ovpn-data:
+  pritunl-data:
+  mongodb-data:

@@ -15,7 +15,8 @@ services:
       - SERVERPORT=51820 #optional
       - PEERS=5 #optional
       - PEERDNS=auto #optional
-      - INTERNAL_SUBNET=10.13.13.0 #optional
+      - INTERNAL_SUBNET=10.13.13.0/24 #optional
+      - LOG_CONFS=false # No guardar conf en logs      
     volumes:
       - /wireguard:/config
       - /lib/modules:/lib/modules

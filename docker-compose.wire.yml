@@ -11,15 +11,13 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=America/Mendoza
-      - SERVERURL=vpn.dnlbertoni.ar #optional
+      - SERVERURL=${SERVERURL} #optional
       - SERVERPORT=51820 #optional
       - PEERS=5 #optional
       - PEERDNS=auto #optional
       - INTERNAL_SUBNET=10.13.13.0/24 #optional
-      - ALLOWEDIPS=10.13.13.0/24 # Red que se enruta
-      - LOG_CONFS=false # No guardar conf en logs      
     volumes:
-      - /wireguard:/config
+      - ./wireguard:/config
       - /lib/modules:/lib/modules
       - /usr/src:/usr/src
     ports:
@@ -27,8 +25,8 @@ services:
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
       - net.ipv4.ip_forward=1
-#    dns:
-#      - 172.20.0.7
+    dns:
+      - 172.20.0.7
     restart: unless-stopped
     networks:
       containers:
@@ -44,7 +42,7 @@ services:
       - "443"
     environment:
       TZ: 'America/Mendoza'
-      WEBPASSWORD: 'peladonerd'
+      WEBPASSWORD: ${WEBPASSWORD}
     volumes:
       - './etc-pihole/:/etc/pihole/'
       - './etc-dnsmasq.d/:/etc/dnsmasq.d/'

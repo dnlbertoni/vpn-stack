@@ -13,7 +13,7 @@ services:
       - TZ=America/Mendoza
       - SERVERURL=${SERVERURL} #optional
       - SERVERPORT=51820 #optional
-      - PEERS=5 #optional
+      - PEERS=${PEERS} #optional
       - PEERDNS=auto #optional
       - INTERNAL_SUBNET=10.13.13.0/24 #optional
     volumes:

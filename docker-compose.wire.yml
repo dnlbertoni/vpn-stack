@@ -16,7 +16,7 @@ services:
       - PEERS=5 #optional
       - PEERDNS=auto #optional
       - INTERNAL_SUBNET=10.13.13.0/24 #optional
-      - ALLOWEDIPS=172.17.20.0/24 # Red que se enruta
+      - ALLOWEDIPS=172.20.0.0/24 # Red que se enruta
       - LOG_CONFS=false # No guardar conf en logs      
     volumes:
       - /wireguard:/config

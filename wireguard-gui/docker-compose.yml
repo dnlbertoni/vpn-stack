@@ -25,3 +25,30 @@ services:
       - SYS_MODULE
     sysctls:
       - net.ipv4.conf.all.src_valid_mark=1
+
+  noip:
+    image: aanousakis/no-ip:latest
+    environment:
+      USERNAME_FILE: /run/secrets/username
+      PASSWORD_FILE: /run/secrets/password
+      DOMAINS_FILE:  /run/secrets/domains
+      INTERVAL_FILE: /run/secrets/interval
+    secrets:
+      - username
+      - password
+      - domains
+      - interval
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+
+secrets:
+ username:
+   external: true
+ password:
+   external: true
+ domains:
+   external: true 
+ interval:
+   external: true

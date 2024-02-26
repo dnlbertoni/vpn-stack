@@ -1,0 +1,8 @@
+{
+  "server": {
+    "privateKey": "WMxkOwGzBq0NyBq7/NPFTc2p/K/kyLYWXOaWQgk9RkE=",
+    "publicKey": "+OVVqciyTdVr2oNYTrgZikxPuIJWbSwX+4l9EkwPEEg=",
+    "address": "10.100.0.1"
+  },
+  "clients": {}
+}
